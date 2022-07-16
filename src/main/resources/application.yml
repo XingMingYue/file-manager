@@ -1,0 +1,37 @@
+server:
+  port: 80
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: 123456
+    url: jdbc:h2:file:${app.work-dir}/db/${app.name}
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  servlet:
+    multipart:
+      max-file-size: 10240MB
+      max-request-size: 10240MB
+      resolve-lazily: true
+logging:
+  level:
+    com.xingmingyue: INFO
+    org.eclipse.jetty.server.HttpChannel: ERROR
+  file:
+    path: ${app.work-dir}/logs
+app:
+  name: file-manager
+  work-dir: ${user.home}/.${app.name}/
